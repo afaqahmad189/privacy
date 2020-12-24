@@ -1,0 +1,46 @@
+1) Admin Panel
+- admin-panel/pages/payment-settings -> content.phtml
+
+2) Wowonder
+- themes\wowonder\layout\modals -> pay-go-pro.phtml
+- themes\wowonder\layout\go-pro -> content.phtml
+- themes\wowonder\img -> robakassa.png (new file)
+
+- themes\wowonder\layout\ads -> wallet.phtml
+- themes\wowonder\layout\modals -> donate_payment_methods.phtml
+- themes\wowonder\layout\extra_js -> content.phtml
+- themes\wowonder\layout\show_fund -> content.phtml
+- themes\wowonder\layout\welcome -> pro_register.phtml
+
+3) Sunshine
+- themes\sunshine\layout\modals -> pay-go-pro.phtml
+- themes\sunshine\layout\go-pro -> content.phtml
+- themes\sunshine\img -> robakassa.png (new file)
+
+- themes\sunshine\layout\ads -> wallet.phtml
+- themes\sunshine\layout\modals -> donate_payment_methods.phtml
+- themes\sunshine\layout\extra_js -> content.phtml
+- themes\sunshine\layout\show_fund -> content.phtml
+- themes\sunshine\layout\welcome -> pro_register.phtml
+
+4) Sources
+- sources\success.php (new file)
+
+5) Assets
+- assets\includes\functions_general.php
+- assets\includes\functions_two.php
+- assets\includes\tabels.php
+
+5) xhr
+- xhr -> robokassa_method.php (new file)
+
+- index.php
+- ajax_loading.php
+- .htaccess
+
+
+shop_id = mrmdating
+
+live mode:
+pass 1 = wu4QsIDXHl05CJez4p0T
+pass 2 = WQk2l1NQJIET3F6yd8FQ
