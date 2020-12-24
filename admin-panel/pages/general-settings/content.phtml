@@ -54,6 +54,21 @@
                             <input type="radio" name="profile_privacy" id="profile_privacy-disabled" value="0" <?php echo ($wo['config']['profile_privacy'] == 0) ? 'checked': '';?>>
                             <label for="profile_privacy-disabled" class="m-l-20">Disabled</label>
                         </div>
+
+                         <label for="p_mode">Privacy Mode <span class="black"  data-trigger="hover" data-content="Allow non logged users to view users profiles in welcome page"><i class="fa fa-question-circle fa-fw"></i></span></label>
+                        <div class="form-group">
+                            <input type="radio" name="p_mode" id="p_mode_enabled" value="1"  <?php echo ($wo['config']['p_mode'] == 1) ? 'checked': '';?>>
+                            <label for="p_mode_enabled">Enabled</label>
+                            <input type="radio" name="p_mode"id="p_mode_disabled" value="0" <?php echo ($wo['config']['p_mode'] == 0) ? 'checked': '';?>>
+                            <label for="p_mode_disabled" class="m-l-20">Disabled</label>
+                        </div>
+                         <label for="private_mode">Private Mode <span class="black" data-toggle="popover" data-trigger="hover" data-content="Allow non logged users to view users profiles in welcome page"><i class="fa fa-question-circle fa-fw"></i></span></label>
+                        <div class="form-group">
+                            <input type="radio" name="private_mode" id="private_mode_enabled" value="1"  <?php echo ($wo['config']['private_mode'] == 1) ? 'checked': '';?>>
+                            <label for="private_mode_enabled">Enabled</label>
+                            <input type="radio" name="private_mode" id="private_mode_disabled" value="0"  <?php echo ($wo['config']['private_mode'] == 0) ? 'checked': '';?>>
+                            <label for="private_mode_disabled" class="m-l-20">Disabled</label>
+                        </div>
                         <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
                         <button type="submit" class="btn btn-primary m-t-15 waves-effect">Save</button>
                     </form>

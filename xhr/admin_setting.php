@@ -1529,6 +1529,14 @@ if ($f == 'admin_setting' AND (Wo_IsAdmin() || Wo_IsModerator())) {
                 //     $db->where('two_factor_verified',1)->update(T_USERS,array('two_factor_email_verified' => 0,
                 //                                                               'two_factor'          => 0));
                 // }
+                if($key=='p_mode'){
+                    $value=$_POST['p_mode'];
+                }
+                if($key=='private_mode'){
+                    $value=$_POST['private_mode'];
+                }
+
+
                 $saveSetting = Wo_SaveConfig($key, $value);
             }
         }

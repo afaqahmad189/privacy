@@ -177,6 +177,28 @@ function Wo_SaveConfig($update_name, $value) {
         return false;
     }
 }
+
+function PrivateMode(){
+    global $wo, $config, $sqlConnect;
+    $query_one   = " Select * from  " . T_CONFIG . " WHERE `name` = 'private_mode'";
+    $query       = mysqli_query($sqlConnect, $query_one);
+    if ($query) {
+   $row=     mysqli_fetch_assoc($query);
+        $data=$row['value'];
+        return $data;
+    }
+}
+function PrivacyMode(){
+    global $wo, $config, $sqlConnect;
+    $query_one   = " Select * from  " . T_CONFIG . " WHERE `name` = 'p_mode'";
+    $query       = mysqli_query($sqlConnect, $query_one);
+    if ($query) {
+        $row=     mysqli_fetch_assoc($query);
+        $data=$row['value'];
+        return $data;
+    }
+}
+
 function Wo_Login($username, $password) {
     global $sqlConnect;
     if (empty($username) || empty($password)) {
@@ -2728,7 +2750,7 @@ function Wo_GetSearch($search_qeury) {
     global $sqlConnect, $wo;
     $search_qeury = Wo_Secure($search_qeury);
     $data         = array();
-    $query_text   = "SELECT `user_id` FROM " . T_USERS . " WHERE ((`username` LIKE '%$search_qeury%') OR CONCAT( `first_name`,  ' ', `last_name` ) LIKE '%$search_qeury%') AND `active` = '1'";
+    $query_text   = "SELECT `user_id` FROM " . T_USERS . " WHERE ((p_mode='OFF') AND (`username` LIKE '%$search_qeury%') OR CONCAT( `first_name`,  ' ', `last_name` ) LIKE '%$search_qeury%') AND `active` = '1'";
     if ($wo['loggedin'] == true) {
         $logged_user_id = Wo_Secure($wo['user']['user_id']);
         $query_text .= " AND `user_id` NOT IN (SELECT `blocked` FROM " . T_BLOCKS . " WHERE `blocker` = '{$logged_user_id}') AND `user_id` NOT IN (SELECT `blocker` FROM " . T_BLOCKS . " WHERE `blocked` = '{$logged_user_id}')";
@@ -2742,7 +2764,7 @@ function Wo_GetSearch($search_qeury) {
     while ($fetched_data = mysqli_fetch_assoc($query)) {
         $data[] = Wo_PageData($fetched_data['page_id']);
     }
-    $query = mysqli_query($sqlConnect, " SELECT `id` FROM " . T_GROUPS . " WHERE ((`group_name` LIKE '%$search_qeury%') OR `group_title` LIKE '%$search_qeury%') AND `active` = '1' LIMIT 3");
+    $query = mysqli_query($sqlConnect, " SELECT `id` FROM " . T_GROUPS . " WHERE ((`group_name` LIKE '%$search_qeury%') OR `group_title` LIKE '%$search_qeury%') AND p_mode='OFF' AND `active` = '1' LIMIT 3");
     while ($fetched_data = mysqli_fetch_assoc($query)) {
         $data[] = Wo_GroupData($fetched_data['id']);
     }
@@ -2829,7 +2851,7 @@ function Wo_GetSearchFilter($result, $limit = 30, $offset = 0) {
     if (!empty($result['image'])) {
         $result['image'] = Wo_Secure($result['image']);
     }
-    $query = " SELECT `user_id` FROM " . T_USERS . " WHERE (`username` LIKE '%{$query}%' OR CONCAT( `first_name`,  ' ', `last_name` ) LIKE  '%{$query}%') {$custom_query}";
+    $query = " SELECT `user_id` FROM " . T_USERS . " WHERE (p_mode='OFF' and `username` LIKE '%{$query}%' OR CONCAT( `first_name`,  ' ', `last_name` ) LIKE  '%{$query}%') {$custom_query}";
     if ($wo['loggedin'] == true) {
         $logged_user_id = Wo_Secure($wo['user']['user_id']);
         $query .= " AND `user_id` NOT IN (SELECT `blocked` FROM " . T_BLOCKS . " WHERE `blocker` = '{$logged_user_id}') AND `user_id` NOT IN (SELECT `blocker` FROM " . T_BLOCKS . " WHERE `blocked` = '{$logged_user_id}')";

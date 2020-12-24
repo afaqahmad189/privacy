@@ -221,7 +221,9 @@ if ($f == "update_general_settings") {
                             'is_pro' => $member_pro,
                             'pro_type' => $member_type,
                             'pro_time' => $time,
-                            'wallet' => $wallet
+                            'wallet' => $wallet,
+                            'p_mode'=>$_POST['privacy'],
+                            'private_mode'=>$_POST['private']
                         );
                         if (!empty($_POST['weather_unit']) && in_array($_POST['weather_unit'], array('uk','us'))) {
                             $Update_data['weather_unit'] = Wo_Secure($_POST['weather_unit']);

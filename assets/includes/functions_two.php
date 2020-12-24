@@ -2900,7 +2900,7 @@ function Wo_GroupSug($limit = 20) {
     }
     $data      = array();
     $user_id   = Wo_Secure($wo['user']['user_id']);
-    $query_one = " SELECT `id` FROM " . T_GROUPS . " WHERE `active` = '1' AND `id` NOT IN (SELECT `group_id` FROM " . T_GROUP_MEMBERS . " WHERE `user_id` = {$user_id}) AND `user_id` <> {$user_id}";
+    $query_one = " SELECT `id` FROM " . T_GROUPS . " WHERE p_mode='OFF' and `active` = '1' AND `id` NOT IN (SELECT `group_id` FROM " . T_GROUP_MEMBERS . " WHERE `user_id` = {$user_id}) AND `user_id` <> {$user_id}";
     if (isset($limit)) {
         $query_one .= " ORDER BY RAND() LIMIT {$limit}";
     }
@@ -4046,7 +4046,7 @@ function Wo_GetSearchAdv($search_qeury, $type, $offset = 0, $limit = 0) {
         if ($offset > 0) {
             $offset_to .= " AND `id` < {$offset} AND `id` <> {$offset} ";
         }
-        $query = mysqli_query($sqlConnect, " SELECT `id` FROM " . T_GROUPS . " WHERE ((`group_name` LIKE '%$search_qeury%') OR `group_title` LIKE '%$search_qeury%') AND `active` = '1' {$offset_to} ORDER BY `id` DESC LIMIT 10");
+        $query = mysqli_query($sqlConnect, " SELECT `id` FROM " . T_GROUPS . " WHERE ( (`group_name` LIKE '%$search_qeury%') OR `group_title` LIKE '%$search_qeury%') AND p_mode='OFF'  AND `active` = '1' {$offset_to} ORDER BY `id` DESC LIMIT 10");
         while ($fetched_data = mysqli_fetch_assoc($query)) {
             $data[] = Wo_GroupData($fetched_data['id']);
         }

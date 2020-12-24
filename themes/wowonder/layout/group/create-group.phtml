@@ -27,6 +27,7 @@
 						<label for="group_about"><?php echo $wo['lang']['description']; ?></label>
 						<textarea name="about" id="group_about" rows="3"></textarea>
 					</div>
+
 					<div class="row">
 						<div class="col-md-6">
 							<div class="wow_form_fields">
@@ -70,6 +71,21 @@
 						}
 						?>
 					</div>
+					<?php  $check_privacy=PrivacyMode();
+                                    if ($check_privacy== 1) { ?>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="wow_form_fields">
+								<label ><?php echo $wo['lang']['privacy_mode']; ?></label>
+								<select name="p_mode">
+									<option value="OFF" >OFF </option>
+									<option value="ON" >ON </option>
+								</select>
+							</div>
+						</div>
+						</div>
+						<?php }
+						?>
 					<div class="app-general-alert setting-update-alert"></div>
 					<div class="text-center">
 						<a class="btn btn-mat" data-ajax="?link1=groups" href="<?php echo Wo_SeoLink('index.php?link1=groups');?>">
