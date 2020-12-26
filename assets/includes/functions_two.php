@@ -3384,8 +3384,11 @@ function Wo_GetMyGames($limit = 0,$offset = 0) {
     }
     return $data;
 }
-function Wo_IsNameExist($username, $active = 0) {
+function Wo_IsNameExist($username, $active = 0,$user_id) {
+
    global $wo, $sqlConnect;
+
+    $wo['user']['user_id'];
    $data = array();
    if (empty($username)) {
        return false;
@@ -3394,35 +3397,84 @@ function Wo_IsNameExist($username, $active = 0) {
    if ($active == 1) {
        $active_text = "AND `active` = '1'";
    }
-   $username     = Wo_Secure($username);
-    
-   $query   = mysqli_query($sqlConnect, "SELECT COUNT(`user_id`) as users FROM " . T_USERS . " WHERE `username` = '{$username}' {$active_text}");
-   $fetched_data = mysqli_fetch_assoc($query);
-   if ($fetched_data['users'] == 1) {
+
+   $query_two=mysqli_query($sqlConnect,"Select private_mode from ". T_USERS ." where user_id=$user_id and private_mode!='OFF'");
+   if(mysqli_num_rows($query_two)==1){
+       $query_one=mysqli_query($sqlConnect,"SELECT * FROM ". T_FOLLOWERS ." 
+   where following_id=$user_id and follower_id=".$wo['user']['user_id']);
+       if(mysqli_num_rows($query_one)==1){
+           $username     = Wo_Secure($username);
+           $query   = mysqli_query($sqlConnect, "SELECT COUNT(`user_id`) as users FROM " . T_USERS . " WHERE `username` = '{$username}' {$active_text}");
+           $fetched_data = mysqli_fetch_assoc($query);
+           if ($fetched_data['users'] == 1) {
+               return array(
+                   true,
+                   'type' => 'user'
+               );
+           }
+           $query   = mysqli_query($sqlConnect, "SELECT COUNT(`page_id`) as pages FROM " . T_PAGES . " WHERE `page_name` = '{$username}' {$active_text}");
+           $fetched_data = mysqli_fetch_assoc($query);
+           if ($fetched_data['pages'] == 1) {
+               return array(
+                   true,
+                   'type' => 'page'
+               );
+           }
+           $query   = mysqli_query($sqlConnect, "SELECT COUNT(`id`) as usergroups FROM " . T_GROUPS . " WHERE `group_name` = '{$username}' {$active_text}") or die(mysqli_error($sqlConnect));
+           $fetched_data = mysqli_fetch_assoc($query);
+           if ($fetched_data['usergroups'] > 0) {
+               return array(
+                   true,
+                   'type' => 'group'
+               );
+           }
+           return array(
+               false
+           );
+       }
+       else{
+           return array(
+               true,
+               'type' => 'nofollowing'
+           );
+       }
+   }
+
+   else{
+       $username     = Wo_Secure($username);
+       $query   = mysqli_query($sqlConnect, "SELECT COUNT(`user_id`) as users FROM " . T_USERS . " WHERE `username` = '{$username}' {$active_text}");
+       $fetched_data = mysqli_fetch_assoc($query);
+       if ($fetched_data['users'] == 1) {
+           return array(
+               true,
+               'type' => 'user'
+           );
+       }
+       $query   = mysqli_query($sqlConnect, "SELECT COUNT(`page_id`) as pages FROM " . T_PAGES . " WHERE `page_name` = '{$username}' {$active_text}");
+       $fetched_data = mysqli_fetch_assoc($query);
+       if ($fetched_data['pages'] == 1) {
+           return array(
+               true,
+               'type' => 'page'
+           );
+       }
+       $query   = mysqli_query($sqlConnect, "SELECT COUNT(`id`) as usergroups FROM " . T_GROUPS . " WHERE `group_name` = '{$username}' {$active_text}") or die(mysqli_error($sqlConnect));
+       $fetched_data = mysqli_fetch_assoc($query);
+       if ($fetched_data['usergroups'] > 0) {
+           return array(
+               true,
+               'type' => 'group'
+           );
+       }
        return array(
-           true,
-           'type' => 'user'
+           false
        );
    }
-    $query   = mysqli_query($sqlConnect, "SELECT COUNT(`page_id`) as pages FROM " . T_PAGES . " WHERE `page_name` = '{$username}' {$active_text}");
-   $fetched_data = mysqli_fetch_assoc($query);
-    if ($fetched_data['pages'] == 1) {
-       return array(
-           true,
-           'type' => 'page'
-       );
-   }
-    $query   = mysqli_query($sqlConnect, "SELECT COUNT(`id`) as usergroups FROM " . T_GROUPS . " WHERE `group_name` = '{$username}' {$active_text}") or die(mysqli_error($sqlConnect));
-   $fetched_data = mysqli_fetch_assoc($query);
-    if ($fetched_data['usergroups'] > 0) {
-       return array(
-           true,
-           'type' => 'group'
-       );
-   }
-    return array(
-       false
-   );
+
+
+
+
+
 }
 function Wo_IsPhoneExist($phone) {
     global $wo, $sqlConnect;

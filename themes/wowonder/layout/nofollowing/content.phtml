@@ -1,0 +1,159 @@
+<?php
+$IsOwner       = Wo_IsOnwer($wo['user_profile']['user_id']);
+$IsOwnerUser   = Wo_IsOnwerUser($wo['user_profile']['user_id']);
+
+if ($wo['loggedin'] && $IsOwnerUser) {
+   $wo['pr_complition'] = Wo_ProfileCompletion();
+}
+
+?>
+<style>.post-youtube iframe {overflow: hidden !important; height: 360px !important;}</style>
+<div class="row page-margin profile wo_user_profile" data-page="timeline" data-id="<?php echo $wo['user_profile']['user_id'];?>">
+	<div class="profile-container">
+		<div class="card hovercard" style="margin-bottom: 0px;">
+			<div class="cardheader user-cover">
+<?php if($IsOwner === true) { ?>
+    <form action="#" method="post" class="profile-cover-changer">
+        <div class="input-group when-notedit profile_cover">
+            <span class="input-group-btn">
+                <span class="btn btn-upload-image btn-file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                    <input type="file" name="cover" accept="image/*" onchange="Wo_UpdateProfileCover();">
+                </span>
+            </span>
+        </div>
+        <div class="input-group profile_cover">
+            <span class="input-group-btn when-notedit">
+                <span class="btn btn-upload-image btn-file" onclick="Wo_StartRepositioner();">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-crop"><path d="M6.13 1L6 16a2 2 0 0 0 2 2h15"></path><path d="M1 6.13L16 6a2 2 0 0 1 2 2v15"></path></svg>
+                </span>
+            </span>
+        </div>
+        <div class="input-group when-edit" style="display: none;">
+            <span class="input-group-btn">
+                <span class="btn btn-upload-image btn-file" onclick="Wo_SubmitRepositioner();">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </span>
+            </span>
+        </div>
+        <div class="input-group when-edit" style="display: none;">
+            <span class="input-group-btn">
+                <span class="btn btn-upload-image btn-file" onclick="Wo_StopRepositioner();">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </span>
+            </span>
+        </div>
+        <input type="hidden" name="user_id" value="<?php echo $wo['user_profile']['user_id'];?>">
+    </form>
+    <form class="cover-position-form hidden" method="post">
+        <input class="cover-position" name="pos" value="0" type="hidden">
+        <input class="image_type" name="image_type" value="0" type="hidden">
+        <input name="cover_image" id="cover-input-image" value="<?php echo $wo['user_profile']['cover_org']?>" type="hidden">
+        <input name="real_image" id="full-input-image" value="<?php echo Wo_GetMedia($wo['user_profile']['cover_full']); ?>" type="hidden">
+    </form>
+<?php } ?>
+<div class="user-cover-uploading-container"></div>
+<div class="user-cover-uploading-progress">
+    <div class="pace-activity-parent"><div class="pace-activity"></div></div>
+</div>
+<div class="user-cover-reposition-container">
+    <div class="user-cover-reposition-w">
+        <img id="cover-image" src="<?php echo $wo['user_profile']['cover']?>" alt="<?php echo $wo['user_profile']['name']?> Cover Image" onclick="Wo_OpenProfileCover('<?php echo $wo['user_profile']['cover_org']?>');" class="pointer"/>
+    </div>
+    <div class="user-reposition-container">
+        <img id="full-image" src="<?php echo Wo_GetMedia($wo['user_profile']['cover_full'])?>" alt="User Image"/>
+        <div class="user-reposition-dragable-container" align="center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-move"><polyline points="5 9 2 12 5 15"></polyline><polyline points="9 5 12 2 15 5"></polyline><polyline points="15 19 12 22 9 19"></polyline><polyline points="19 9 22 12 19 15"></polyline><line x1="2" y1="12" x2="22" y2="12"></line><line x1="12" y1="2" x2="12" y2="22"></line></svg>
+<?php echo $wo['lang']['drag_to_re']; ?>
+</div>
+<div class="user-cover-uploading-container user-repositioning-icons-container1"></div>
+<div class="user-cover-uploading-progress user-repositioning-icons-container"></div>
+</div>
+</div>
+</div>
+
+<div class="problackback"></div>
+<div class="pic-info-cont">
+<div class="user-avatar flip <?php if ($wo['have_stories'] == true && $wo['story_seen_class'] != 'seen_story' && $wo['loggedin'] == true) { ?><?php echo($wo['story_seen_class']); ?><?php } ?>">
+                    <div class="user-avatar-uploading-container">
+                        <div class="user-avatar-uploading-progress">
+                            <div class="ball-pulse"><div></div><div></div><div></div></div>
+                        </div>
+                    </div>
+                    <img id="updateImage-<?php echo $wo['user_profile']['user_id']?>" class="pointer <?php if ($wo['have_stories'] == true && $wo['story_seen_class'] != 'seen_story' && $wo['loggedin'] == true) { ?><?php echo($wo['story_seen_class']); ?> see_all_stories<?php } ?>" alt="<?php echo $wo['user_profile']['name']?> Profile Picture" src="<?php echo $wo['user_profile']['avatar']?>" <?php if ($wo['have_stories'] == true && $wo['story_seen_class'] != 'seen_story' && $wo['loggedin'] == true) { ?> data_story_user_id="<?php echo $wo['user_profile']['user_id']?>"  data_story_type="user" <?php } else{ ?> onclick="Wo_OpenProfilePicture('<?php echo $wo['user_profile']['avatar_org']?>');" <?php } ?> />
+<?php if($IsOwner === true) { ?>
+    <form action="#" method="post" class="profile-avatar-changer">
+        <div class="input-group">
+            <span class="input-group-btn profile_avatar">
+                <span class="btn btn-upload-image btn-file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="feather"><path fill="currentColor" d="M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z" /></svg>
+                    <input type="file" name="avatar" accept="image/x-png, image/jpeg" onchange="Wo_UpdateProfileAvatar();">
+                </span>
+<?php if ($wo['user_profile']['avatar_org'] != $wo['userDefaultAvatar'] && $wo['user_profile']['avatar_org'] != $wo['userDefaultFAvatar']) {?>
+<span class="btn btn-upload-image btn-file" onclick="OpenCropModal()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="feather"><path fill="currentColor" d="M7,17V1H5V5H1V7H5V17A2,2 0 0,0 7,19H17V23H19V19H23V17M17,15H19V7C19,5.89 18.1,5 17,5H9V7H17V15Z" /></svg>
+</span>
+<?php } ?>
+</span>
+</div>
+<input type="hidden" name="user_id" id="user-id" value="<?php echo $wo['user_profile']['user_id'];?>">
+</form>
+<?php } ?>
+</div>
+<div class="info">
+<div class="title">
+    <a href="<?php echo Wo_SeoLink('index.php?link1=timeline&u=' . $wo['user_profile']['username'] . '');?>" data-ajax="?link1=timeline&u=<?php echo $wo['user_profile']['username'];?>">
+<?php echo $wo['user_profile']['name']; ?>
+</a>
+<?php if($wo['user_profile']['verified'] == 1) {   ?>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="verified-color feather feather-check-circle" title="<?php echo $wo['lang']['verified_user'];?>" data-toggle="tooltip"><path d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg>
+<?php } ?>
+
+<?php if (Wo_IsUserPro($wo['user_profile']['is_pro']) === true) {
+$user_pro_type = Wo_GetUserProType($wo['user_profile']['pro_type']);
+?>
+<span class="badge-pro" style="background-color:<?php echo $user_pro_type['color_name'];?>">
+    <a class="badge-link" href="<?php echo Wo_SeoLink('index.php?link1=go-pro');?>" title="<?php echo $user_pro_type['type_name'];?>" data-toggle="tooltip">PRO</a>
+</span>
+<?php } ?>
+</div>
+<div class="options-buttons">
+<span class="user-follow-button btn-glossy">
+<?php echo Wo_GetFollowButton($wo['user_profile']['user_id']);?>
+</span>
+
+<?php if ($wo['config']['notify_new_post'] == 1) { ?>
+    <span class="user-follow-button">
+<?php echo Wo_GetNotifyButton($wo['user_profile']['user_id']);?>
+</span>
+<?php } ?>
+<?php if($IsOwnerUser === true) { ?>
+<span class="btn-glossy">
+    <a class="btn btn-default" href="<?php echo Wo_SeoLink('index.php?link1=setting&user=' . $wo['user_profile']['username'] . '&page=general-setting') ?>" data-ajax="?link1=setting&user=<?php echo $wo['user_profile']['username'] . '&page=general-setting'; ?>">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon></svg>
+<?php echo $wo['lang']['edit'];?>
+</a>
+</span>
+<span class="btn-glossy">
+<a class="btn btn-default" href="<?php echo Wo_SeoLink('index.php?link1=timeline&u=' . $wo['user_profile']['username'] . '&type=activities');?>" data-ajax="?link1=timeline&u=<?php echo $wo['user_profile']['username'] . '&type=activities'; ?>">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg>
+<?php echo $wo['lang']['activities'];?>
+</a>
+</span>
+<?php } else { ?>
+<?php } ?>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="container">
+<div  style="background-color: white;height: 100px" align="center">
+<b><label style="padding-top: 39px">This Account is Preivate Please Follow First</label></b>
+</div>
+</div>
+<style>
+	.post-youtube iframe {
+		height: 362px !important;
+	}
+</style>

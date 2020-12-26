@@ -5,6 +5,7 @@ $IsOwnerUser   = Wo_IsOnwerUser($wo['user_profile']['user_id']);
 if ($wo['loggedin'] && $IsOwnerUser) {
    $wo['pr_complition'] = Wo_ProfileCompletion();
 }
+
 ?>
 <style>.post-youtube iframe {overflow: hidden !important; height: 360px !important;}</style>
 <div class="row page-margin profile wo_user_profile" data-page="timeline" data-id="<?php echo $wo['user_profile']['user_id'];?>">
@@ -70,9 +71,8 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="problackback"></div>
-				
 			<div class="pic-info-cont">
                 <div class="user-avatar flip <?php if ($wo['have_stories'] == true && $wo['story_seen_class'] != 'seen_story' && $wo['loggedin'] == true) { ?><?php echo($wo['story_seen_class']); ?><?php } ?>">
                     <div class="user-avatar-uploading-container">
@@ -108,8 +108,8 @@ if ($wo['loggedin'] && $IsOwnerUser) {
                         <?php if($wo['user_profile']['verified'] == 1) {   ?>
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="verified-color feather feather-check-circle" title="<?php echo $wo['lang']['verified_user'];?>" data-toggle="tooltip"><path d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg>
                         <?php } ?>
-						
-						<?php if (Wo_IsUserPro($wo['user_profile']['is_pro']) === true) { 
+
+						<?php if (Wo_IsUserPro($wo['user_profile']['is_pro']) === true) {
 						$user_pro_type = Wo_GetUserProType($wo['user_profile']['pro_type']);
 						?>
 						<span class="badge-pro" style="background-color:<?php echo $user_pro_type['color_name'];?>">
@@ -208,7 +208,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
                 </div>
 			</div>
 		</div>
-			
+
 		<div class="row" style="margin: -33px 0px 20px 0px;">
 			<label class="col-md-1 "></label>
 			<div class="user-bottom-nav col-md-10 ">
@@ -241,7 +241,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 								<span class="split-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M16 17V19H2V17S2 13 9 13 16 17 16 17M12.5 7.5A3.5 3.5 0 1 0 9 11A3.5 3.5 0 0 0 12.5 7.5M15.94 13A5.32 5.32 0 0 1 18 17V19H22V17S22 13.37 15.94 13M15 4A3.39 3.39 0 0 0 13.07 4.59A5 5 0 0 1 13.07 10.41A3.39 3.39 0 0 0 15 11A3.5 3.5 0 0 0 15 4Z" fill="currentColor"></path></svg></span>
 								<span><?php echo $wo['lang']['friends_btn'];?></span>
 							</a>
-						</li>	
+						</li>
 					<?php } ?>
 					<?php if ($wo['config']['connectivitySystem'] == 0) {?>
 						<li>
@@ -262,7 +262,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
                             <span class="split-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z" fill="currentColor"></path></svg></span>
 							<span><?php echo $wo['lang']['photos'];?></span>
 						</a>
-					</li>                    
+					</li>
                     <li>
 						<a href="<?php echo Wo_SeoLink('index.php?link1=timeline&u=' . $wo['user_profile']['username'] . '&type=videos');?>" data-ajax="?link1=timeline&u=<?php echo $wo['user_profile']['username']?>&type=videos">
                             <span class="split-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M17,10.5V7A1,1 0 0,0 16,6H4A1,1 0 0,0 3,7V17A1,1 0 0,0 4,18H16A1,1 0 0,0 17,17V13.5L21,17.5V6.5L17,10.5Z" fill="currentColor"></path></svg></span>
@@ -310,7 +310,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 					<div class="wo_page_hdng_innr">
 						<span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M15,14C12.33,14 7,15.33 7,18V20H23V18C23,15.33 17.67,14 15,14M6,10V7H4V10H1V12H4V15H6V12H9V10M15,12A4,4 0 0,0 19,8A4,4 0 0,0 15,4A4,4 0 0,0 11,8A4,4 0 0,0 15,12Z"></path></svg></span> <?php echo $wo['lang']['following']; ?>
 						<div style="font-weight:normal;margin-left: auto;">
-							<a href="<?php echo Wo_SeoLink('index.php?link1=timeline&u=' . $wo['user_profile']['username'] . '&type=family_list');?>" data-ajax="?link1=timeline&u=<?php echo $wo['user_profile']['username']?>&type=family_list"><?php echo $wo['lang']['family_members']; ?></a> 
+							<a href="<?php echo Wo_SeoLink('index.php?link1=timeline&u=' . $wo['user_profile']['username'] . '&type=family_list');?>" data-ajax="?link1=timeline&u=<?php echo $wo['user_profile']['username']?>&type=family_list"><?php echo $wo['lang']['family_members']; ?></a>
 						</div>
 					</div>
 				</div>
@@ -341,16 +341,16 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 			<div class="page-margin wow_content mt-0">
 				<div class="wo_page_hdng pag_neg_padd pag_alone">
 					<div class="wo_page_hdng_innr">
-						<span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M16 17V19H2V17S2 13 9 13 16 17 16 17M12.5 7.5A3.5 3.5 0 1 0 9 11A3.5 3.5 0 0 0 12.5 7.5M15.94 13A5.32 5.32 0 0 1 18 17V19H22V17S22 13.37 15.94 13M15 4A3.39 3.39 0 0 0 13.07 4.59A5 5 0 0 1 13.07 10.41A3.39 3.39 0 0 0 15 11A3.5 3.5 0 0 0 15 4Z"></path></svg></span> 
-						<?php 
+						<span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M16 17V19H2V17S2 13 9 13 16 17 16 17M12.5 7.5A3.5 3.5 0 1 0 9 11A3.5 3.5 0 0 0 12.5 7.5M15.94 13A5.32 5.32 0 0 1 18 17V19H22V17S22 13.37 15.94 13M15 4A3.39 3.39 0 0 0 13.07 4.59A5 5 0 0 1 13.07 10.41A3.39 3.39 0 0 0 15 11A3.5 3.5 0 0 0 15 4Z"></path></svg></span>
+						<?php
 						if ($wo['config']['connectivitySystem'] == 1) {
 							echo $wo['lang']['friends_btn'];
 						} else {
 							echo $wo['lang']['followers'];
 						}
-						?> 
+						?>
 						<div style="font-weight:normal;margin-left: auto;">
-							<a href="<?php echo Wo_SeoLink('index.php?link1=timeline&u=' . $wo['user_profile']['username'] . '&type=family_list');?>" data-ajax="?link1=timeline&u=<?php echo $wo['user_profile']['username']?>&type=family_list"><?php echo $wo['lang']['family_members']; ?></a> 
+							<a href="<?php echo Wo_SeoLink('index.php?link1=timeline&u=' . $wo['user_profile']['username'] . '&type=family_list');?>" data-ajax="?link1=timeline&u=<?php echo $wo['user_profile']['username']?>&type=family_list"><?php echo $wo['lang']['family_members']; ?></a>
 						</div>
 					</div>
 				</div>
@@ -368,7 +368,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 							} else {
 								foreach (Wo_GetFollowers($wo['user_profile']['user_id'],'profile',100) as $wo['UsersList']) {
 								echo Wo_LoadPage('timeline/follow-list');
-								} 
+								}
 							}
 						}
 					?>
@@ -392,7 +392,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 			<div class="list-group profile-lists">
 				<div id="videos-list" class="user_media_list_section">
                     <?php
-                        $video_stories = Wo_GetPosts(array('filter_by' => 'video','limit' => 50, 'publisher_id' => $wo['user_profile']['user_id'])); 
+                        $video_stories = Wo_GetPosts(array('filter_by' => 'video','limit' => 50, 'publisher_id' => $wo['user_profile']['user_id']));
 
                         if (count($video_stories) == 0) {
                             echo '<div class="empty_state"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M17,10.5V7A1,1 0 0,0 16,6H4A1,1 0 0,0 3,7V17A1,1 0 0,0 4,18H16A1,1 0 0,0 17,17V13.5L21,17.5V6.5L17,10.5Z" fill="currentColor"></path></svg>' . $wo['lang']['no_posts_found'] . '</div>';
@@ -419,7 +419,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 					<i class="fa fa-arrow-down progress-icon" data-icon="arrow-down"></i> <?php echo $wo['lang']['load_more_videos']; ?></button>
 				</div>
 			<?php } ?>
-			
+
             <?php } else if ($_GET['type'] == 'photos') { ?>
 				<div class="page-margin wow_content mt-0">
 				<div class="wo_page_hdng pag_neg_padd pag_alone">
@@ -431,8 +431,8 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 			<div class="list-group profile-lists">
 				<div id="photos-list" class="user_media_list_section">
                     <?php
-                        $photo_stories = Wo_GetPosts(array('filter_by' => 'photos','limit' => 10, 'publisher_id' => $wo['user_profile']['user_id'])); 
-                       
+                        $photo_stories = Wo_GetPosts(array('filter_by' => 'photos','limit' => 10, 'publisher_id' => $wo['user_profile']['user_id']));
+
                         if (count($photo_stories) == 0) {
                             echo '<div class="empty_state"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z" fill="currentColor"></path></svg>' . $wo['lang']['no_posts_found'] . '</div>';
                         } else {
@@ -480,7 +480,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 						} else {
 							foreach (Wo_GetLikes($wo['user_profile']['user_id'],'profile',100) as $wo['PageList']) {
 							echo Wo_LoadPage('timeline/likes-list');
-							} 
+							}
 						}
 					?>
 				</div>
@@ -508,7 +508,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 						} else {
 							foreach (Wo_GetUsersGroups($wo['user_profile']['user_id'], 5000) as $wo['GroupList']) {
 							echo Wo_LoadPage('timeline/groups-list');
-							} 
+							}
 						}
 					?>
 				</div>
@@ -521,7 +521,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 						<span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A3,3 0 0,1 15,5A3,3 0 0,1 12,8A3,3 0 0,1 9,5A3,3 0 0,1 12,2M12,9C13.63,9 15.12,9.35 16.5,10.05C17.84,10.76 18.5,11.61 18.5,12.61V18.38C18.5,19.5 17.64,20.44 15.89,21.19V19C15.89,18.05 15.03,17.38 13.31,16.97C12.75,16.84 12.31,16.78 12,16.78C11.13,16.78 10.3,16.95 9.54,17.3C8.77,17.64 8.31,18.08 8.16,18.61C9.5,19.14 10.78,19.41 12,19.41L13,19.31V21.94L12,22C10.63,22 9.33,21.72 8.11,21.19C6.36,20.44 5.5,19.5 5.5,18.38V12.61C5.5,11.61 6.16,10.76 7.5,10.05C8.88,9.35 10.38,9 12,9M12,11A2,2 0 0,0 10,13A2,2 0 0,0 12,15A2,2 0 0,0 14,13A2,2 0 0,0 12,11Z"></path></svg></span> <?php echo $wo['lang']['family_members']; ?>
 						<?php if ($wo['user_profile']['user_id'] == $wo['user']['id']): ?>
 						<div style="font-weight:normal;margin-left: auto;">
-							<a href="<?php echo Wo_SeoLink('index.php?link1=timeline&u=' . $wo['user_profile']['username'] . '&type=requests');?>" data-ajax="?link1=timeline&u=<?php echo $wo['user_profile']['username']?>&type=requests"><?php echo $wo['lang']['requests']; ?></a> 
+							<a href="<?php echo Wo_SeoLink('index.php?link1=timeline&u=' . $wo['user_profile']['username'] . '&type=requests');?>" data-ajax="?link1=timeline&u=<?php echo $wo['user_profile']['username']?>&type=requests"><?php echo $wo['lang']['requests']; ?></a>
 						</div>
 						<?php endif; ?>
 					</div>
@@ -529,7 +529,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 			</div>
 			<div class="list-group profile-lists">
 				<div id="family-members-list" class="row" style="margin: 0;">
-					<?php 
+					<?php
 						$family = Wo_GetFamaly($wo['user_profile']['user_id'],false,1);
 						$i      = 0;
 						if (count($family) > 0) {
@@ -553,14 +553,14 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 					<div class="wo_page_hdng_innr">
 						<span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M15,14C12.33,14 7,15.33 7,18V20H23V18C23,15.33 17.67,14 15,14M6,10V7H4V10H1V12H4V15H6V12H9V10M15,12A4,4 0 0,0 19,8A4,4 0 0,0 15,4A4,4 0 0,0 11,8A4,4 0 0,0 15,12Z"></path></svg></span> <?php echo $wo['lang']['requests']; ?>
 						<div style="font-weight:normal;margin-left: auto;">
-							<a href="<?php echo Wo_SeoLink('index.php?link1=timeline&u=' . $wo['user_profile']['username'] . '&type=family_list');?>" data-ajax="?link1=timeline&u=<?php echo $wo['user_profile']['username']?>&type=family_list"><?php echo $wo['lang']['family_members']; ?></a> 
+							<a href="<?php echo Wo_SeoLink('index.php?link1=timeline&u=' . $wo['user_profile']['username'] . '&type=family_list');?>" data-ajax="?link1=timeline&u=<?php echo $wo['user_profile']['username']?>&type=family_list"><?php echo $wo['lang']['family_members']; ?></a>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="list-group profile-lists">
 				<div id="family-requests-list" class="row" style="margin: 0;">
-					<?php 
+					<?php
 						$family = Wo_GetFamaly($wo['user_profile']['user_id'],false,0,true);
 						if (count($family) > 0) {
 							$i      = 0;
@@ -578,9 +578,9 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 				</div>
 				<div class="clear"></div>
 			</div>
-        <?php } else { 
-               header("Location: " . Wo_SeoLink('index.php?link1=timeline&u=' . $_GET['u'])); 
-               exit(); 
+        <?php } else {
+               header("Location: " . Wo_SeoLink('index.php?link1=timeline&u=' . $_GET['u']));
+               exit();
             } ?>
         <?php } else { echo Wo_GetPostPublisherBox(0, $wo['user_profile']['user_id']); ?>
         <?php if ($wo['loggedin'] == true) { echo Wo_LoadPage('story/filter-by'); } ?>
@@ -601,7 +601,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 					    if ($wo['loggedin'] && $wo['user_profile']['user_id'] == $wo['user']['id']) {
 					    	$array['anonymous'] = true;
 					    }
-						$stories = Wo_GetPosts($array); 
+						$stories = Wo_GetPosts($array);
 						if (count($stories) == 0 && count($pinedstory) == 0) {
 							echo Wo_LoadPage('story/profile-no-stories');
 						} else {
@@ -616,13 +616,13 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 						<span class="btn btn-default"><i class="fa fa-chevron-circle-down progress-icon" data-icon="chevron-circle-down"></i> &nbsp;<?php echo $wo['lang']['load_more_posts']; ?><span>
 					</div>
 				<?php } ?>
-			</div>  
+			</div>
 		<?php } ?>
         <div id="load-more-filter">
             <span class="filter-by-more hidden" data-filter-by="all"></span>
         </div>
     </div>
-	
+
 	<div class="col-md-4">
         <?php if($wo['loggedin'] == true && $wo['config']['gift_system'] != 0) {  ?>
             <?php if ($IsOwnerUser == false) { ?>
@@ -632,12 +632,12 @@ if ($wo['loggedin'] && $IsOwnerUser) {
             <?php } ?>
         <?php } ?>
 
-                        
+
         <!-- Profile Percentage System -->
         <?php if ($IsOwnerUser === true && array_sum($wo['pr_complition']) < 100): ?>
             <?php echo Wo_LoadPage('timeline/profile-completion'); ?>
         <?php endif; ?>
-        
+
 		<?php if($wo['loggedin'] == true) {  ?>
 			<div class="wow_content">
 				<div class="wow_form_fields mt-0">
@@ -646,7 +646,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 				</div>
 			</div>
         <?php } ?>
-		
+
         <ul class="page-margin wow_content negg_padd list-unstyled event-options-list right_user_info">
             <div class="wo_page_hdng">
 				<div class="wo_page_hdng_innr">
@@ -657,7 +657,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
             <?php if($wo['config']['user_lastseen'] == 1 && $wo['user_profile']['showlastseen'] != 0 && $wo['loggedin'] == true) {  ?>
             <li class="list-group-item">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"></path></svg>
-                <?php echo Wo_UserStatus($wo['user_profile']['user_id'], $wo['user_profile']['lastseen'], 'profile') ?> 
+                <?php echo Wo_UserStatus($wo['user_profile']['user_id'], $wo['user_profile']['lastseen'], 'profile') ?>
             </li>
             <?php } ?>
             <li class="list-group-item">
@@ -671,13 +671,13 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 				<a rel="nofollow" href="<?php echo $wo['user_profile']['website']?>"><?php echo $wo['user_profile']['website']?></a>
             </li>
 			<?php } ?>
-			
+
             <li class="list-group-item" style="padding-top:0; padding-bottom:0;">
                 <hr>
             </li>
             <li class="list-group-item">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M9,11.75A1.25,1.25 0 0,0 7.75,13A1.25,1.25 0 0,0 9,14.25A1.25,1.25 0 0,0 10.25,13A1.25,1.25 0 0,0 9,11.75M15,11.75A1.25,1.25 0 0,0 13.75,13A1.25,1.25 0 0,0 15,14.25A1.25,1.25 0 0,0 16.25,13A1.25,1.25 0 0,0 15,11.75M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,11.71 4,11.42 4.05,11.14C6.41,10.09 8.28,8.16 9.26,5.77C11.07,8.33 14.05,10 17.42,10C18.2,10 18.95,9.91 19.67,9.74C19.88,10.45 20,11.21 20,12C20,16.41 16.41,20 12,20Z"></path></svg>
-                <?php 
+                <?php
                 $gender = ucfirst(strtolower($wo['user_profile']['gender']));
                 if (in_array($wo['user_profile']['gender'], array_keys($wo['genders']))) {
                 	echo $wo['genders'][$wo['user_profile']['gender']];
@@ -685,7 +685,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
                 else{
                 	echo $wo['genders'][array_keys($wo['genders'])[0]];
                 }
-                //echo ($gender == 'Male') ? $wo['lang']['male'] : $wo['lang']['female']; 
+                //echo ($gender == 'Male') ? $wo['lang']['male'] : $wo['lang']['female'];
                 ?>
             </li>
             <?php if ($wo['user_profile']['birthday'] != '0000-00-00' && Wo_CanSeeBirthday($wo['user_profile']['user_id'], $wo['user_profile']['birth_privacy']) === true) {  ?>
@@ -719,14 +719,14 @@ if ($wo['loggedin'] && $IsOwnerUser) {
                 <hr>
             </li>
             <?php } ?>
-            
-            <?php 
+
+            <?php
             $country = $wo['user_profile']['country_id'];
             if ($country > 0) {
             ?>
             <li class="list-group-item">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M17.9,17.39C17.64,16.59 16.89,16 16,16H15V13A1,1 0 0,0 14,12H8V10H10A1,1 0 0,0 11,9V7H13A2,2 0 0,0 15,5V4.59C17.93,5.77 20,8.64 20,12C20,14.08 19.2,15.97 17.9,17.39M11,19.93C7.05,19.44 4,16.08 4,12C4,11.38 4.08,10.78 4.21,10.21L9,15V16A2,2 0 0,0 11,18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg>
-                <?php echo $wo['lang']['living_in'];?> 
+                <?php echo $wo['lang']['living_in'];?>
                 <?php echo $wo['countries_name'][$country];?>
             </li>
             <?php } ?>
@@ -739,10 +739,10 @@ if ($wo['loggedin'] && $IsOwnerUser) {
                 <?php } ?>
             </li>
             <?php } ?>
-			
+
 			<?php if(!empty($wo['user_profile']['facebook']) || !empty($wo['user_profile']['twitter']) || !empty($wo['user_profile']['linkedin']) || !empty($wo['user_profile']['vk']) || !empty($wo['user_profile']['youtube'])) { ?>
 				<li class="list-group-item text-muted" contenteditable="false">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg> 
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
 					<?php echo $wo['lang']['social_links']; ?>
 				</li>
 				<li class="list-group-item user-social-links">
@@ -780,9 +780,9 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 				</li>
 			<?php } ?>
         </ul>
-		
-		
-            
+
+
+
         <?php if(!empty($wo['user_profile']['about'])) {  ?>
 			<div class="page-margin wow_content">
 				<div class="wo_page_hdng pag_neg_padd">
@@ -795,7 +795,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
         <?php } ?>
 
         <?php
-        $fields = Wo_GetProfileFields('none'); 
+        $fields = Wo_GetProfileFields('none');
         if (count($fields) > 0) { ?>
         <ul class="page-margin wow_content negg_padd list-unstyled event-options-list">
 			<div class="wo_page_hdng">
@@ -813,8 +813,8 @@ if ($wo['loggedin'] && $IsOwnerUser) {
             ?>
         </ul>
         <?php } ?>
-		
-        <?php 
+
+        <?php
 			echo Wo_LoadPage('timeline/albums-sidebar');
             if ($wo['config']['connectivitySystem'] == 1) {
               echo Wo_LoadPage('timeline/friends-sidebar');
@@ -827,9 +827,9 @@ if ($wo['loggedin'] && $IsOwnerUser) {
             if ($wo['config']['groups'] == 1) {
             	echo Wo_LoadPage('timeline/groups-sidebar');
             }
-            
+
             ?>
-        <?php 
+        <?php
             $sidebar_ad = Wo_GetAd('sidebar', false);
             if (!empty($sidebar_ad)) {?>
         <ul class="list-group sidebar-ad">
@@ -973,7 +973,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<p style="text-align: center;padding: 30px 20px;font-family: Hind,Arial;font-size: 16px;">
-				<i class="fa fa-check" aria-hidden="true" style="color: green;"></i>      
+				<i class="fa fa-check" aria-hidden="true" style="color: green;"></i>
 				<?php echo $wo['lang']['you_have_poked'] . " " . ucfirst($wo['user_profile']['username']); ?>
 			</p>
 		</div>
@@ -983,7 +983,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<p style="text-align: center;padding: 30px 20px;font-family: Hind,Arial;font-size: 16px;">
-				<i class="fa fa-check" aria-hidden="true" style="color: green;"></i>      
+				<i class="fa fa-check" aria-hidden="true" style="color: green;"></i>
 				<?php echo $wo['lang']['family_member_added']; ?>
 			</p>
 		</div>
@@ -1034,7 +1034,7 @@ if ($wo['loggedin'] && $IsOwnerUser) {
 </style>
 <script>
 $(function(){
-    var url = window.location.pathname, 
+    var url = window.location.pathname,
         urlRegExp = new RegExp(url.replace(/\/$/,'') + "$"); // create regexp to match current url pathname and remove trailing slash if present as it could collide with the link in navigation in case trailing slash wasn't present there
         // now grab every link from the navigation
         $('.user-bottom-nav a').each(function(){
@@ -1059,7 +1059,7 @@ function Wo_SendGiftToUser(from, to){
 
     $('#send-gift-button').attr('disabled','');
 	$('#send_gift').find('.ball-pulse').fadeIn(100);
-	
+
     $.ajax({
         url: Wo_Ajax_Requests_File(),
         type: 'GET',
@@ -1079,7 +1079,7 @@ function Wo_SendGiftToUser(from, to){
     .fail(function() {
         console.log("error");
     })
-    
+
 }
 
 function Wo_RegisterPoke(received_user_id , send_user_id){
@@ -1262,7 +1262,7 @@ function Wo_AddFamilyMember(){
                 $('#add_to_family').find('btn-main').removeAttr('disabled');
                 location.reload()
             },1500);
-            
+
         }
         else{
             $('.add_to_family_alert').html('<div class="alert alert-success">' + data.message + '</div>');
@@ -1272,14 +1272,14 @@ function Wo_AddFamilyMember(){
     })
     .fail(function() {
         console.log("error");
-    })  
+    })
 }
 
 function Wo_ReportProfile(id = false,report = true){
     var report_text = $("#report-user-text-<?php echo $wo['user_profile']['id']; ?>").val();
     if (!id) {return false;}
     else if(report == true){
-      if (!report_text) {return false;}  
+      if (!report_text) {return false;}
     }
     $('#report_profile').find('.modal-footer .ball-pulse').fadeIn(100);
     $.ajax({
@@ -1322,7 +1322,7 @@ function loadposts(user_id) {
 var user_id = $('.profile').attr('data-id');
 $(function () {
   user_id = $('.profile').attr('data-id');
-  <?php 
+  <?php
   if (!empty($_GET['story'])) {
     ?>
     Wo_LoadStory('prof', $('[data-page=timeline]').attr('data-id'));
@@ -1343,7 +1343,7 @@ $(function () {
       $('.profile-cover-changer').fadeOut(100);
     });
   }
-  
+
   $('form.profile-avatar-changer').ajaxForm({
     url: Wo_Ajax_Requests_File() + '?f=update_user_avatar_picture',
 
@@ -1355,7 +1355,7 @@ $(function () {
       $('.profile_avatar').fadeIn(100);
       if(data.status == 200) {
         Wo_GetNewPosts();
-        $('[id^=updateImage-<?php echo $wo['user_profile']['id']; ?>]').attr('data-target', '#ProfileImageModal-Stopped'); 
+        $('[id^=updateImage-<?php echo $wo['user_profile']['id']; ?>]').attr('data-target', '#ProfileImageModal-Stopped');
         $('[id^=updateImage-<?php echo $wo['user_profile']['id']; ?>]').attr('onclick', 'Wo_OpenProfilePicture("' + data.img_or + '");');
         $('[id^=updateImage-<?php echo $wo['user_profile']['id']; ?>]').attr("src", data.img);
         $('#cropImage').modal('show');
@@ -1385,7 +1385,7 @@ $(function () {
 
   $('form.cover-position-form').ajaxForm({
         url:  Wo_Ajax_Requests_File() + '?f=re_cover',
-        dataType:  'json', 
+        dataType:  'json',
         beforeSend: function() {
             $('.user-reposition-dragable-container').hide();
             $('.user-repositioning-icons-container1').show();
@@ -1405,7 +1405,7 @@ $(function () {
                     $('input.cover-position').val(0);
 					$('.wo_user_profile .card.hovercard .pic-info-cont, .problackback').fadeIn();
                     // /$('.user-reposition-container img').draggable('destroy').css('cursor','default');
-                    
+
                 });
             }
         }
@@ -1421,7 +1421,7 @@ $(function () {
       $('.profile_cover').fadeIn(100);
       if(data.status == 200) {
         Wo_GetNewPosts();
-        $('[id^=cover-image]').attr('data-target', '#ProfileCoverImageModal-Stopped');      
+        $('[id^=cover-image]').attr('data-target', '#ProfileCoverImageModal-Stopped');
         $('[id^=cover-image]').attr('onclick', 'Wo_OpenProfileCover("' + data.cover_or + '");');
         $('[id^=cover-image]').attr("src", data.img);
         $('#full-image').attr("src", data.cover_full);

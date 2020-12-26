@@ -6,9 +6,18 @@ if ($wo['loggedin'] == false) {
     }
 }
 if (isset($_GET['u'])) {
-    $check_user = Wo_IsNameExist($_GET['u'], 1);
+    $searched_user_id=Wo_UserIdFromUsername($_GET['u']);
+    $check_user = Wo_IsNameExist($_GET['u'], 1,$searched_user_id);
+
     if (in_array(true, $check_user)) {
-        if ($check_user['type'] == 'user') {
+        if($check_user['type'] == 'nofollowing'){
+            $id                 = $user_id = Wo_UserIdFromUsername($_GET['u']);
+            $wo['user_profile'] = Wo_UserData($user_id);
+            $type               = 'nofollowing';
+            $about              = $wo['page_profile']['about'];
+            $name               = $wo['page_profile']['name'];
+        }
+        else if ($check_user['type'] == 'user') {
             $id                 = $user_id = Wo_UserIdFromUsername($_GET['u']);
             $wo['user_profile'] = Wo_UserData($user_id);
             $type               = 'timeline';
@@ -31,20 +40,24 @@ if (isset($_GET['u'])) {
                     }
                 }
             }
-        } else if ($check_user['type'] == 'page') {
+        }
+        else if ($check_user['type'] == 'page') {
             $id                 = $page_id = Wo_PageIdFromPagename($_GET['u']);
             $wo['page_profile'] = Wo_PageData($page_id);
             $type               = 'page';
             $about              = $wo['page_profile']['about'];
             $name               = $wo['page_profile']['name'];
-        } else if ($check_user['type'] == 'group') {
+        }
+        else if ($check_user['type'] == 'group') {
             $id                  = $group_id = Wo_GroupIdFromGroupname($_GET['u']);
             $wo['group_profile'] = Wo_GroupData($group_id);
             $type                = 'group';
             $about               = $wo['group_profile']['about'];
             $name                = $wo['group_profile']['name'];
         }
-    } else {
+    }
+
+    else {
         header("Location: " . Wo_SeoLink('index.php?link1=404'));
         exit();
     }
@@ -100,13 +113,12 @@ if ($type == 'timeline' && $wo['loggedin'] == true) {
        $con2 = 0;
        if (!isset($came_from)) {
            header("Location: " . $wo['config']['site_url']);
-           exit(); 
+           exit();
        } else {
            Wo_RedirectSmooth(Wo_SeoLink('index.php?link1=404'));
        }
     }
 }
-
 $can_ = 0;
 if ($wo['loggedin'] == true && $wo['config']['profileVisit'] == 1 && $type == 'timeline' && $con2 == 1) {
     if ($wo['user_profile']['user_id'] != $wo['user']['user_id'] && $wo['user']['visit_privacy'] == 0) {
