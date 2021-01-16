@@ -250,7 +250,8 @@ if ($f == 'groups') {
                             'group_title' => $_POST['group_title'],
                             'category' => $_POST['group_category'],
                             'sub_category' => $sub_category,
-                            'about' => $_POST['about']
+                            'about' => $_POST['about'],
+                            'p_mode'=>$_POST['privacy']
                         );
 
                         $fields = Wo_GetCustomFields('group'); 

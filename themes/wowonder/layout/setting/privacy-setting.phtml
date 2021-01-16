@@ -266,7 +266,55 @@
 				</div>
 			</div>
 		 </div>
+<?php
 
+ $check_mode=PrivateMode();
+ if ($check_mode== 1) { ?>
+<div class="row">
+
+<div class="col-md-6">
+<?php
+    $private_mode_yes = ($wo['setting']['private_mode'] == ON)   ? ' checked' : '';
+    $private_mode_no  = ($wo['setting']['private_mode'] == OFF)   ? ' checked' : '';
+?>
+            <div class="col-md-12">
+            <div class="wow_form_fields mb-0">
+                <label for="type"><?php echo $wo['lang']['private_mode'];?></label>
+            </div>
+    <input type="radio" name="private"  value="OFF" <?php echo $private_mode_no; ?>>
+<?php echo $wo['lang']['off']; ?>
+</label>
+<label class="radio-inline" >
+<input type="radio" name="private"  value="ON"   <?php echo $private_mode_yes; ?>>
+<?php echo $wo['lang']['on']; ?>
+</label>
+</div>
+</div>
+<?php } ?>
+
+<?php
+ $check_privacy=PrivacyMode();
+ if ($check_privacy== 1) { ?>
+<div class="col-md-6">
+<?php
+    $p_mode_yes = ($wo['setting']['p_mode'] == ON)   ? ' checked' : '';
+    $p_mode_no  = ($wo['setting']['p_mode'] == OFF)   ? ' checked' : '';
+?>
+            <div class="col-md-12">
+            <div class="wow_form_fields mb-0">
+                <label for="type"><?php echo $wo['lang']['privacy_mode'];?></label>
+            </div>
+    <input type="radio" name="privacy"  value="OFF" <?php echo $p_mode_no; ?>>
+<?php echo $wo['lang']['off']; ?>
+</label>
+<label class="radio-inline" >
+<input type="radio" name="privacy"  value="ON" <?php echo $p_mode_yes; ?>>
+<?php echo $wo['lang']['on']; ?>
+</label>
+</div>
+</div>
+</div>
+<?php } ?>
 		<div class="text-center">
 			<button type="submit" class="btn btn-main btn-mat btn-mat-raised add_wow_loader"><?php echo $wo['lang']['save']; ?></button>
 		</div>

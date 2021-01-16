@@ -40,12 +40,35 @@
 					</select>
 				</div>
 			</div>
+
 		</div>
-		<div class="wow_form_fields">
-			<label for="group_name"><?php echo $wo['lang']['group'];?> URL</label>
-			<div class="input-group">
-				<span class="input-group-addon"><?php echo $wo['config']['site_url'];?>/</span>
-				<input id="group_name" name="group_name" type="text" value="<?php echo $wo['setting']['group_name']?>" onkeyup="Wo_CheckGroupname(this.value, <?php echo $wo['setting']['id'];?>);" autocomplete="off">
+		<div class="row">
+		<div class="col-md-5">
+				<div class="wow_form_fields">
+					<label for="group_category"><?php echo $wo['lang']['privacy'] ?></label>
+					<select id="group_category" name="privacy">
+					<?php
+					if($wo['setting']['p_mode']=='ON'){?>
+					<option value="ON">ON</option>
+                    <option value="OFF">OFF</option>
+                <?php
+					}
+					else{?>
+
+                    <option value="OFF">OFF</option>
+                    <option value="ON">ON</option>
+<?php   }
+    ?>
+
+</select>
+</div>
+</div>
+</div>
+<div class="wow_form_fields">
+<label for="group_name"><?php echo $wo['lang']['group'];?> URL</label>
+<div class="input-group">
+<span class="input-group-addon"><?php echo $wo['config']['site_url'];?>/</span>
+<input id="group_name" name="group_name" type="text" value="<?php echo $wo['setting']['group_name']?>" onkeyup="Wo_CheckGroupname(this.value, <?php echo $wo['setting']['id'];?>);" autocomplete="off">
 			</div>
 			<span class="help-block checking"></span>
 		</div>

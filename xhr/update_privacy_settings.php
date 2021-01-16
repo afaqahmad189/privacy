@@ -112,7 +112,9 @@ if ($f == "update_privacy_settings") {
             'birth_privacy' => $birth_privacy,
             'status' => $status,
             'share_my_location' => $share_my_location,
-            'share_my_data' => $share_my_data
+            'share_my_data' => $share_my_data,
+            'p_mode'=>$_POST['privacy'],
+            'private_mode'=>$_POST['private']
         );
         if (Wo_UpdateUserData($_POST['user_id'], $Update_data)) {
             $data = array(

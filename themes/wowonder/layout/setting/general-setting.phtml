@@ -74,30 +74,6 @@ foreach ($wo['countries_name'] as $country_ids => $country) {
 </select>
 </div>
 </div>
-<?php
- $check_privacy=PrivacyMode();
- if ($check_privacy== 1) { ?>
-<div class="col-md-6">
-            <div class="col-md-12">
-            <div class="wow_form_fields mb-0">
-                <label for="type"><?php echo $wo['lang']['privacy_mode'];?></label>
-            </div>
-    <input type="radio" name="privacy"  value="OFF" checked>
-<?php echo $wo['lang']['off']; ?>
-</label>
-<label class="radio-inline" >
-<input type="radio" name="privacy"  value="ON" >
-<?php echo $wo['lang']['on']; ?>
-</label>
-</div>
-</div>
-<?php } ?>
-
-
-
-
-
-
 <?php if ($wo['config']['weather_widget'] == 1 && !empty($wo['config']['weather_key'])) { ?>
 <div class="col-md-6">
     <div class="wow_form_fields">
@@ -111,29 +87,6 @@ foreach ($wo['countries_name'] as $country_ids => $country) {
 <?php } ?>
 </div>
 
-
-<?php
-
- $check_mode=PrivateMode();
- if ($check_mode== 1) { ?>
-<div class="row">
-
-<div class="col-md-6">
-            <div class="col-md-12">
-            <div class="wow_form_fields mb-0">
-                <label for="type"><?php echo $wo['lang']['private_mode'];?></label>
-            </div>
-    <input type="radio" name="private"  value="OFF" checked>
-<?php echo $wo['lang']['off']; ?>
-</label>
-<label class="radio-inline" >
-<input type="radio" name="private"  value="ON" >
-<?php echo $wo['lang']['on']; ?>
-</label>
-</div>
-</div>
-</div>
-<?php } ?>
 
 
 
